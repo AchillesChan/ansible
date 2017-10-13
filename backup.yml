@@ -1,0 +1,6 @@
+- hosts: azure-nginx
+  remote_user: user1
+  #remote_user: user2 
+  #remote_user: user3 
+  roles:
+    - backup

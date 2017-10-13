@@ -1,0 +1,13 @@
+---
+- name: mkdir custom-scripts
+  raw: mkdir -p /etc/custom-scripts 
+- name: cp backup sh
+  copy: src=compare-backup.sh dest=/etc/custom-scripts/compare-backup.sh
+- name: copy backup-file-list
+  copy: src=backupFileList dest=/etc/custom-scripts/backupFileList
+- name: chmod sh excute
+  raw: chmod +x /etc/custom-scripts/compare-backup.sh
+- name: copy compareBackupExcludeList
+  copy: src=compareBackupExcludeList dest=/etc/custom-scripts/compareBackupExcludeList
+- name: crontab backup
+  lineinfile: dest=/etc/crontab line='0 2 * * *     root    /etc/custom-scripts/compare-backup.sh'

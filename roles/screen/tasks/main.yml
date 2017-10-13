@@ -1,0 +1,15 @@
+---
+- name: copy tar.gz
+  copy: src=screen.tar.gz dest=/tmp/screen.tar.gz
+- name: copy cfg 
+  copy: src=screenrc dest=/etc/screenrc mode=0644
+- name: copy sh
+  copy: src=ansibleInstallScreen.sh dest=/tmp/ansibleInstallScreen.sh mode=0755
+- name: run
+  script: /home/Michael/ansible/roles/screen/files/ansibleInstallScreen.sh
+- file: 
+    path: /tmp/ansibleInstallScreen.sh
+    state: absent
+- file:
+    path: /tmp/screen.tar.gz 
+    state: absent

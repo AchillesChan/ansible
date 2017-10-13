@@ -1,0 +1,29 @@
+---
+- name: cp profile
+  copy: src=profile dest=/etc/profile
+- name: copy vimrc
+  copy: src=vimrc dest=/etc/vimrc
+- name: copy bashrc
+  copy: src=bashrc dest=/etc/bashrc
+- name: enable firewalld
+  raw: systemctl enable firewalld
+- name: enable zabbix_agentd port
+  raw: firewall-cmd --add-port 10050/tcp --permanent
+- name:  start firewalld
+  raw: systemctl start firewalld
+#- name: create .ssh
+#  raw: mkdir -p /home/azureuser/.ssh
+#- name: copy authorized_keys
+#  copy: src=authorized_keys dest=/home/azureuser/.ssh
+#- name: set permission of authorized_keys
+#  raw: chmod -R 700 /home/azureuser
+#- name: set file permission
+#  raw: chmod -R 600 /home/azureuser/.ssh/authorized_keys
+#- name: set user group of .ssh
+#  raw: chown -R azureuser.azureuser /home/azureuser
+#- name: restart ssh
+#  raw: systemctl restart sshd
+#- name: insert something in bashrc
+#  lineinfile: dest=/etc/bashrc line='alias ng='ss -tlnp|grep ''
+- name: yum expect gcc gcc++ vim
+  raw: yum -y install expect gcc vim gcc++ gcc-devel

@@ -1,0 +1,4 @@
+- hosts: test 
+  remote_user: user3
+  roles:
+    - screen

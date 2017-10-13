@@ -1,0 +1,5 @@
+- hosts: test
+  remote_user: user3 
+  #remote_user: user2 
+  roles:
+    - lsyncd 

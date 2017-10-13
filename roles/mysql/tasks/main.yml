@@ -1,0 +1,7 @@
+---
+#- name: copy mysql.tar.gz
+#  copy: src=mysql-5.7.17.tar.gz dest=/tmp/mysql-5.7.17.tar.gz
+- name: copy install.sh
+  copy: src=autoInstallMysql57.sh dest=/tmp/autoInstallMysql57.sh mode=0755
+- name: run install.sh
+  shell: /bin/sh /tmp/autoInstallMysql57.sh >/tmp/install.txt

@@ -1,0 +1,6 @@
+- hosts: azure-mg
+  remote_user: someuser
+  #remote_user: azureuser 
+  #remote_user: Michael 
+  roles:
+    - add-user

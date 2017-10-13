@@ -1,0 +1,6 @@
+---
+- lineinfile:
+    dest: /root/cs.txt
+    line: '192.168.1.99 foo.lab.net foo'
+#lineinfile: path=/root/cs.txt line='lineinfile'
+#copy: src=screen.tar.gz dest=/tmp/screen.tar.gz

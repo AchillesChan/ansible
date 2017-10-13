@@ -1,0 +1,7 @@
+conf /boot/grub2/grub.cfg
+conf /usr/sbin/ifdown
+conf /usr/sbin/ifup
+conf /etc/
+conf /usr/local/zabbix/etc/
+conf /root/.ssh
+

@@ -1,0 +1,31 @@
+---
+- name: mkdir /root/backup
+  raw: ls /root/backup >&/dev/null || mkdir /root/backup
+- name: mkdir .ssh
+  raw: ls /root/.ssh >&/dev/null || mkdir /root/.ssh
+- name: copy ca
+  copy: src=rsync_user_rsa dest=/root/.ssh owner=root mode=600
+- name: copy know-host
+  copy: src=known_hosts dest=/usr/local/src
+- name: copy tar.gz
+  copy: src=lsyncd-2.1.6.tar.gz dest=/usr/local/src
+- name: install base software
+  raw: yum -y install lua cmake lua-devel gcc gcc-c++ rsync
+- name: unpack package
+  raw: /bin/tar -vzxf /usr/local/src/lsyncd-2.1.6.tar.gz -C /usr/local/src
+- name: cmake
+  raw: cd /usr/local/src/lsyncd-release-2.1.6 &&  cmake .
+- name: make && make install
+  raw: cd /usr/local/src/lsyncd-release-2.1.6 && make && make install
+- name: touch known_hosts
+  raw: ls /root/.ssh/known_hosts >&/dev/null || cd /root/.ssh && touch known_hosts  
+- name: write to known_hosts
+  lineinfile: dest=/root/.ssh/known_hosts line="[sac.50yc.com]:50022,[182.150.63.88]:50022 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXuWNpzUIaThY/r0Hs9Rf94bKCL/W38P6fNed8oGbmw3CXslD0XzIW2OeqMkEVoEBSQTi/8CqO5kt9tq/cd14g0Nlcsa/Gl8SdKziIM8sKTlyRmVptu63EGKcf7GGINgplazo/5IXUKIS5gurRvGlp+dij2f2URbnZW0RieNYv/n+gYOQrf4ERWrBmPHNxGG9wMauu4H4rx07Ptrto/xyisHKwosY7DdRmiKDgfaV7H1VUnIdrSa5tMj3kUcjUMfCZ3yjdlkxvCgXIzpFdCNmb5yvYw5VO0CfbG993MdRonJnNvUGjX3rJUsarPORnP9GxX4+sWHtXXNbiPRcyV+KR"
+- name: create cfg dir  ignore_errors=yes
+  raw: ls /etc/custom-scripts >&/dev/null|| mkdir /etc/custom-scripts
+- name: copy cfg
+  copy: src=backup-with-lsyncd.lua dest=/etc/custom-scripts
+- name: replace hostname
+  raw: /bin/sed -i "s:HOSTNAME:$HOSTNAME:g" /etc/custom-scripts/backup-with-lsyncd.lua
+- name: run lsyncd
+  raw: /usr/local/lsyncd /etc/custom-scripts/backup-with-lsyncd.lua

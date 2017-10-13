@@ -1,0 +1,9 @@
+- hosts: test
+- hosts: sfwm
+   remote_user: user2 
+- tasks:
+   ping
+#  roles:
+#    - initial
+#    - zabbix
+#    - screen 

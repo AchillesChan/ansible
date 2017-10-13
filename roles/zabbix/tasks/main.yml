@@ -1,0 +1,7 @@
+---
+- name: copy tar.gz
+  copy: src=zabbix-3.0.4.tar.gz dest=/tmp/zabbix-3.0.4.tar.gz
+- name: copy sh
+  copy: src=autoInstallZbxClient.sh dest=/tmp/autoInstallZbxClient.sh mode=0755
+- name: run
+  shell: /bin/sh /tmp/autoInstallZbxClient.sh
