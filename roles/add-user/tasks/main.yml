@@ -6,7 +6,7 @@
 - name: modify group
   raw: usermod -g wheel user-name
 - name: mkdir home
-  raw: ls /home/user-name || mkdir /home/user-name/.ssh
+  raw: ls /home/user-name/.ssh || mkdir -p /home/user-name/.ssh
 - name: copy public key
   copy: src=your-privity-key.pub dest=/home/user-name/.ssh/authorized_keys
 - name: chown home
