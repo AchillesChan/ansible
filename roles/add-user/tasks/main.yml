@@ -12,7 +12,7 @@
 - name: chown home
   raw: chown -R user-name.user-name /home/user-name/.ssh
 - name: add ssh config group
-  lineinfile: dest=/etc/ssh/sshd_config line='Match group wheel'
+  lineinfile: dest=/etc/ssh/sshd_config line='Match Group wheel'
 - name: add ssh config deny password login
   lineinfile: dest=/etc/ssh/sshd_config line='    PasswordAuthentication no'
 - name: add sudoer
