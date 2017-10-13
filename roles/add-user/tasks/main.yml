@@ -8,7 +8,7 @@
 - name: mkdir home
   raw: ls /home/user-name || mkdir /home/user-name/.ssh
 - name: copy public key
-  copy: src=scwlyd.pub dest=/home/user-name/.ssh/authorized_keys
+  copy: src=your-privity-key.pub dest=/home/user-name/.ssh/authorized_keys
 - name: chown home
   raw: chown -R user-name.user-name /home/user-name/.ssh
 - name: add ssh config group
