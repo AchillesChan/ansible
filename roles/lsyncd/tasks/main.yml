@@ -28,4 +28,4 @@
 - name: replace hostname
   raw: /bin/sed -i "s:HOSTNAME:$HOSTNAME:g" /etc/custom-scripts/backup-with-lsyncd.lua
 - name: run lsyncd
-  raw: /usr/local/lsyncd /etc/custom-scripts/backup-with-lsyncd.lua
+  raw: /usr/local/bin/lsyncd /etc/custom-scripts/backup-with-lsyncd.lua
