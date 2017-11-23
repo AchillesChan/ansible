@@ -1,7 +1,7 @@
 #!/bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/root/bin:/usr/local/mysq/bin
 export PATH
-#srvIP="192.168.1.13"
+#srvIP="192.168.1.13"  ####ftp server,comment
 ftpUser="xml"
 ftpPwd="dangerous"
 mysqlPkg="mysql-5.7.17.tar.gz" ##需要boost版本
@@ -13,12 +13,12 @@ mysqlConf="/etc/my.cnf"
 vmCpuCores=$(cat /proc/cpuinfo |grep processor |wc -l)
 mv /tmp/$mysqlPkg $srcPath
 cd $srcPath
-wget --user=$ftpUser --password=$ftpPwd $ftpPath
+##wget --user=$ftpUser --password=$ftpPwd $ftpPath  ####ftp wget comment 
 
 #add mysql user
 if [ `cat /etc/passwd|grep 'mysql' |wc -l` -eq 0 ];then
         groupadd -r mysql
-        useradd -g mysql -s /sbin/nologin -g mysql -M mysql
+        useradd -g mysql -s /sbin/nologin -g mysql -M mysql 
 fi
 yum install -y gcc-c++ ncurses-devel gcc gcc++ gcc-g77 openssl-devel cmake
 tar zxf $mysqlPkg
@@ -40,7 +40,7 @@ cd $srcPath/mysql-5.7.17/support-files/
 mv $mysqlConf "$mysqlConf".bak
 cp my-default.cnf $mysqlConf
 
-chown -R mysql.mysql $installPath
+chown -R mysql.mysql $installPath  ####basedir and data dir need exactly path 
 $installPath/bin/mysqld --initialize --basedir=$installPath --datadir=$installPath/data/ --user=mysql
 
 cp $srcPath/mysql-5.7.17/support-files/mysql.server /etc/init.d/mysqld
